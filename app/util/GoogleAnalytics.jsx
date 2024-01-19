@@ -1,4 +1,5 @@
-import { useRouter } from 'next/router';
+"use client"
+import {usePathname, useSearchParams} from 'next/navigation'
 import Script from 'next/script';
 import { useEffect } from 'react';
 
@@ -14,19 +15,27 @@ const addPageView = (url) => {
 };
 
 const GoogleAnalytics = () => {
-  const router = useRouter();
+
+  //const navigation = useNavigation();
+  //const pathname = usePathname()
+
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
+  //url
+  const url = pathname + searchParams.toString()
+
 
   useEffect(() => {
+
+    console.log(`Path : ${url}`);
     // @ts-ignore
     const handleRouteChange = (url) => {
       addPageView(url);
     };
+
+    handleRouteChange(url)
     console.log("Initialization of Google Analytics !");
-    router.events.on('routeChangeComplete', handleRouteChange);
-    return () => {
-      router.events.off('routeChangeComplete', handleRouteChange);
-    };
-  }, [router.events]);
+  }, [pathname,searchParams]);
 
   return (
     <>
