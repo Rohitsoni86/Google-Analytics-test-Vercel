@@ -3,6 +3,7 @@ import './globals.css'
 import Link from 'next/link'
 import GoogleAnalytics from './util/GoogleAnalytics'
 import * as gtag from "@/app/util/gtag";
+import Script from 'next/script';
 
 
 const inter = Inter({ subsets: ['latin'] })
