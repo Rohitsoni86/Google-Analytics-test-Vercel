@@ -15,4 +15,4 @@ import TagManager from 'react-gtm-module'
     <div>Dashboard page</div>
   )
 }
-*/s
+*/
