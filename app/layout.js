@@ -2,8 +2,14 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import Link from 'next/link'
 import GoogleAnalytics from './util/GoogleAnalytics'
+import * as gtag from "@/app/util/gtag";
+
 
 const inter = Inter({ subsets: ['latin'] })
+
+// **Important** Replace this tracking ID by your Analytics code
+const GA_TRACKING_ID = 'G-47L3DR2NK1';
+
 
 export const metadata = {
   title: 'Next Js Learn',
@@ -12,12 +18,27 @@ export const metadata = {
 
 
 export default function RootLayout({ children }) {
-  
-  
   return (
     <html lang="en">
       <body className={inter.className}>
-     
+    {/* Global Site Tag (gtag.js) - Google Analytics */}
+    <Script
+        strategy="afterInteractive"
+        src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
+      />
+      <Script
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_TRACKING_ID}', {
+              page_path: window.location.pathname,
+            });
+          `,
+        }}
+      />
         <nav className="bg-white border-gray-200 dark:bg-gray-900">
           <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
             <Link href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
@@ -54,7 +75,7 @@ export default function RootLayout({ children }) {
             </div>
           </div>
         </nav>
-        <GoogleAnalytics />
+        {/* <GoogleAnalytics /> */}
         {children}
       </body>
     </html>

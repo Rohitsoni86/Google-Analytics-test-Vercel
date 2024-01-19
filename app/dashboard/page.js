@@ -5,7 +5,7 @@ import React, { useEffect } from 'react'
 import TagManager from 'react-gtm-module'
 // GA 4 Implement
 
-export default function DashboardPage() {
+/* export default function DashboardPage() {
   useEffect(() => {
     console.log("Running Google Tag manager !");
 
@@ -15,3 +15,4 @@ export default function DashboardPage() {
     <div>Dashboard page</div>
   )
 }
+*/s
