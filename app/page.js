@@ -7,6 +7,7 @@ import toast, { Toaster } from 'react-hot-toast';
 
 import { DNA } from 'react-loader-spinner';
 
+
 export default function LoginPage() {
     const router = useRouter();
     const [userData, setUserData] = useState({
@@ -24,9 +25,9 @@ export default function LoginPage() {
             setLoading(true);
             console.log(userData);
 
-          //  const response = await axios.post("/api/login", userData);
+            //  const response = await axios.post("/api/login", userData);
             console.log("Signup success", response.data);
-         //   router.push(`/user`);
+            //   router.push(`/user`);
 
         } catch (error) {
             console.log("Signup failed", error.message);
@@ -39,6 +40,25 @@ export default function LoginPage() {
     }
     return (
         <>
+            {/* Global Site Tag (gtag.js) - Google Analytics */}
+            {/* <Script
+                strategy="afterInteractive"
+                src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
+            />
+            <Script
+                strategy="afterInteractive"
+                dangerouslySetInnerHTML={{
+                    __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_TRACKING_ID}', {
+              page_path: window.location.pathname,
+            });
+          `,
+                }}
+            /> */}
+           
             <div className="relative flex flex-col justify-center bg-orange-200 min-h-screen overflow-hidden">
                 {loading ?
                     <div

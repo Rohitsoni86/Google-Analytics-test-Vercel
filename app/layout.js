@@ -2,14 +2,12 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import Link from 'next/link'
 import GoogleAnalytics from './util/GoogleAnalytics'
-import * as gtag from "@/app/util/gtag";
-import Script from 'next/script';
-
-
-const inter = Inter({ subsets: ['latin'] })
+import Script from "next/script";
 
 // **Important** Replace this tracking ID by your Analytics code
 const GA_TRACKING_ID = 'G-47L3DR2NK1';
+
+const inter = Inter({ subsets: ['latin'] })
 
 
 export const metadata = {
@@ -21,25 +19,22 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){window.dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '${GA_TRACKING_ID}');
+     `}
+        </Script>
+      </head>
       <body className={inter.className}>
-    {/* Global Site Tag (gtag.js) - Google Analytics */}
-    <Script
-        strategy="afterInteractive"
-        src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
-      />
-      <Script
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', '${GA_TRACKING_ID}', {
-              page_path: window.location.pathname,
-            });
-          `,
-        }}
-      />
+      <GoogleAnalytics />
         <nav className="bg-white border-gray-200 dark:bg-gray-900">
           <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
             <Link href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
@@ -76,7 +71,7 @@ export default function RootLayout({ children }) {
             </div>
           </div>
         </nav>
-        {/* <GoogleAnalytics /> */}
+      
         {children}
       </body>
     </html>
